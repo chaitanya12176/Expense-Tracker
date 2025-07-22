@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expense Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Tracker.css">
+    <link rel="icon" href="data:,"> <!-- Suppresses favicon.ico 404 error -->
+  </head>
+  <body>
+
+    <div class="header">
+      <p class="m-0">Expense<br>Tracker
+        <img src="./expensetracker.jpeg" alt="" width="35px">
+      </p>
+    </div>
+
+    <div class="input-form">
+      <div class="form-floating inputs">
+        <input type="date" class="form-control dateInput" id="dateInput" placeholder="Date">
+        <label for="dateInput">Date</label>
+      </div>
+
+      <div class="form-floating inputs">
+        <input type="text" class="form-control amountInput" id="amountInput" placeholder="Amount">
+        <label for="amountInput">Amount</label>
+      </div>
+
+      <select class="form-select inputs transactionType" aria-label="Default select example">
+        <option selected>Transaction Type</option>
+        <option value="Income">Income</option>
+        <option value="Expense">Expense</option>
+      </select>
+
+      <button class="btn" id="add-button"onclick="addRow()">+</button>
+    </div>
+
+    <div class="cards mt-4 d-flex gap-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">
+            Total Income 
+            <img src="./wallet.jpeg" alt="Wallet" width="35px">
+          </h5>
+          <h1 class="m-0">
+            <img src="./rupee.png" alt="Rupee" width="25px">
+            <span id="totalIncome" class="m-0">0</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">
+            Total Expense 
+            <img src="./wallet.jpeg" alt="Wallet" width="35px">
+          </h5>
+          <h1 class="m-0">
+            <img src="./rupee.png" alt="Rupee" width="25px">
+            <span id="expense" class="m-0">0</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">
+            Balance 
+            <img src="./bagrupee.jpeg" alt="Wallet" width="35px">
+          </h5>
+          <h1 class="m-0">
+            <img src="./rupee.png" alt="Rupee" width="25px">
+            <span id="balance" class="m-0">0</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <table class="transaction-table mt-3" id="table">
+      <tr id="header-row">
+        <th>Amount</th>
+        <th>Transaction type</th>
+        <th>Transaction Date</th>
+        <th>Action</th>
+      </tr>
+      
+     </table>
+      
+
+    <script>
+      let table=document.getElementById("table")
+      console.log("Table:", table);
+
+      function deleteRow(row){
+        console.log(row)
+        row.remove(row);
+
+      }
+
+      function addRow() 
+      {
+        let date=document.getElementsByClassName('dateInput')[0].value
+        let amount=document.getElementsByClassName('amountInput')[0].value
+        let transactionType=document.getElementsByClassName("transactionType")[0].value
+        let row=document.createElement('tr')
+        let amountCell=document.createElement('td')
+        amountCell.innerText=amount;
+        let transactionCell=document.createElement('td')
+        transactionCell.innerText=transactionType;
+        let dateCell=document.createElement('td')
+        dateCell.innerText=date;
+
+        let binCell=document.createElement('td')
+        let deleteButton=document.createElement('button')
+        let binImage=document.createElement('img')
+        binImage.src='./bin.png'
+        binImage.style.width='20px'
+        binImage.style.height='20px'
+        deleteButton.appendChild(binImage)
+        deleteButton.classList.add('delete-button')
+        deleteButton.onclick=()=>deleteRow(row)
+        binCell.appendChild(deleteButton);
+        row.appendChild(amountCell)
+        row.appendChild(transactionCell)
+        row.appendChild(dateCell)
+        row.appendChild(binCell)
+        table.appendChild(row)
+
+        let totalIncome = document.getElementById('totalIncome').innerText;
+let totalExpense = document.getElementById('expense').innerText;
+let balance = document.getElementById('balance').innerText;
+
+if (transactionType === 'Income') {
+    if (totalIncome === '0') {
+        document.getElementById('totalIncome').innerText = amount;
+    } else {
+        document.getElementById('totalIncome').innerText = parseInt(totalIncome) + parseInt(amount);
+    }
+
+    if (balance === '0') {
+        document.getElementById('balance').innerText = amount;
+    } else {
+        document.getElementById('balance').innerText = parseInt(balance) + parseInt(amount);
+    }
+} else if (transactionType === 'Expense') {
+    if (totalExpense === '0') {
+        document.getElementById('expense').innerText = amount;
+    } else {
+        document.getElementById('expense').innerText = parseInt(totalExpense) + parseInt(amount);
+    }
+
+    if (balance === '0') {
+        document.getElementById('balance').innerText = -parseInt(amount);
+    } else {
+        document.getElementById('balance').innerText = parseInt(balance) - parseInt(amount);
+    }
+}
+
+
+
+
+
+            console.log('Line 145: ', totalIncome, totalExpense, balance)
+        }
+    
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" integrity="sha384-7qAoOXltbVP82
