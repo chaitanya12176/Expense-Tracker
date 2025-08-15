@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Tracker.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+
+  <div class="header">
+    <p class="m-0">Expense<br>Tracker
+      <img src="./expensetracker.jpeg" alt="" width="35px">
+    </p>
+  </div>
+
+  <div class="input-form">
+    <div class="form-floating inputs">
+      <input type="date" class="form-control dateInput" id="dateInput" placeholder="Date">
+      <label for="dateInput">Date</label>
+    </div>
+
+    <div class="form-floating inputs">
+      <input type="text" class="form-control amountInput" id="amountInput" placeholder="Amount">
+      <label for="amountInput">Amount</label>
+    </div>
+
+    <select class="form-select inputs transactionType" aria-label="Default select example">
+      <option selected>Transaction Type</option>
+      <option value="Income">Income</option>
+      <option value="Expense">Expense</option>
+    </select>
+
+    <button class="btn" id="add-button" onclick="addRow()">+</button>
+  </div>
+
+  <div class="cards mt-4 d-flex gap-3">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Total Income <img src="./wallet.jpeg" alt="Wallet" width="35px"></h5>
+        <h1 class="m-0"><img src="./rupee.png" alt="Rupee" width="25px"><span id="totalIncome" class="m-0">0</span></h1>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Total Expense <img src="./wallet.jpeg" alt="Wallet" width="35px"></h5>
+        <h1 class="m-0"><img src="./rupee.png" alt="Rupee" width="25px"><span id="expense" class="m-0">0</span></h1>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Balance <img src="./bagrupee.jpeg" alt="Wallet" width="35px"></h5>
+        <h1 class="m-0"><img src="./rupee.png" alt="Rupee" width="25px"><span id="balance" class="m-0">0</span></h1>
+      </div>
+    </div>
+  </div>
+
+  <table class="transaction-table mt-3" id="table">
+    <thead>
+      <tr id="header-row">
+        <th>Amount</th>
+        <th>Transaction type</th>
+        <th>Transaction Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Axios Library (Must be before tracker.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Your Tracker Script -->
+  <script src="./js/tracker.js"></script>
+
+</body>
+</html>
